@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Pray For Rain</title>
+<meta name="description" content="Ein Meer voller Inseln, viele Völker, und du als Geist dieser Welt. Die Welt lebt weiter, auch wenn du gehst.">
+<meta name="theme-color" content="#0f1c24">
+<link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<meta name="apple-mobile-web-app-title" content="Pray For Rain">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=202610241921">
+<link rel="stylesheet" href="onboard.css?v=202610241921">
+<link rel="stylesheet" href="mobile.css?v=202610241921">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.js", "three/addons/": "./vendor/three/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="labels"></div>
+
+<header id="top">
+  <div class="brand">
+    <div class="logo"><img src="assets/emblem.png" alt="">PRAY FOR RAIN</div>
+    <div class="when"><span id="date">Jahr 1</span><span id="clock"></span></div>
+    <div class="era-chip" id="era">Ankunft</div>
+  </div>
+  <div class="chips">
+    <div class="chip"><b id="popN">0</b><span>Menschen</span></div>
+    <div class="chip"><b id="setN">0</b><span>Siedlungen</span></div>
+    <div class="chip"><b id="faithN">0%</b><span>Glaube</span></div>
+    <div class="chip research" title="Woran die Menschen gerade denken"><span id="resName">Feuer</span><div class="rbar"><i id="resBar"></i></div></div>
+  </div>
+  <div class="right">
+    <div class="mana" title="Deine Kraft wächst mit dem Glauben der Menschen">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" class="track"/><circle cx="50" cy="50" r="44" class="fill" id="manaRing"/></svg>
+      <div class="mtxt"><b id="manaN">100</b><small>/<span id="manaMax">100</span></small></div>
+      <div class="mlabel"><span>Kraft</span><small id="manaRate"></small></div>
+    </div>
+    <div class="seg" id="speed"><button data-s="1" title="Echtzeit (1)">1×</button><button data-s="3" title="Schneller (2)">3×</button><button data-s="10" title="Zeitraffer (3)">10×</button><button id="fastBtn" title="Schneller Zeitraffer (4 bis 8)">»</button><div id="fastMenu"><button data-s="100" title="100-fach (4)">100×</button><button data-s="500" title="500-fach (5)">500×</button><button data-s="1000" title="1000-fach, ein Jahr in unter einer Sekunde (6)">1000×</button><button data-s="10000" title="10.000-fach, rund 14 Jahre pro Sekunde (7)">10.000×</button><button data-s="100000" title="100.000-fach, so schnell der Rechner kann (8)">100.000×</button></div></div>
+    <div class="icons">
+      <button id="btnHero" title="Meine Geschichte (H)"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20c.6-4 3.3-6.5 7-6.5s6.4 2.5 7 6.5 M12 13.5v6.5"/></svg></button>
+      <button id="btnMap" title="Karte (M)"><svg viewBox="0 0 24 24"><path d="M3.5 6.5l5.5-2.5 6 2.5 5.5-2.5v13.5l-5.5 2.5-6-2.5-5.5 2.5z M9 4v13.5 M15 6.5V20"/></svg></button>
+      <button id="btnFly" title="Flugzeug (P)"><svg viewBox="0 0 24 24"><path d="M12 3.5c.9 0 1.4.9 1.4 2v4.3l7.1 3.6v2l-7.1-2v3.9l2.4 1.8v1.6L12 19.8l-3.8.9v-1.6l2.4-1.8v-3.9l-7.1 2v-2l7.1-3.6V5.5c0-1.1.5-2 1.4-2z"/></svg></button>
+      <button id="btnGhost" title="Geistmodus (G)"><svg viewBox="0 0 24 24"><path d="M6 20V11a6 6 0 0 1 12 0v9l-2-1.6-2 1.6-2-1.6-2 1.6-2-1.6z M9.5 11h.01 M14.5 11h.01"/></svg></button>
+      <button id="btnIsland" title="Inselbuch (I)"><svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5C4.7 20 4 19.3 4 18.5z M13 4h5.5c.8 0 1.5.7 1.5 1.5v13c0 .8-.7 1.5-1.5 1.5H13z"/></svg></button>
+      <button id="btnChron" title="Chronik (C)"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z M9 9h6 M9 13h6 M9 17h4"/></svg></button>
+      <button id="btnLab" title="Labor: Experimente mit Seuchen, Wanderung, Glaube"><svg viewBox="0 0 24 24"><path d="M9 3.5h6 M10 3.5v6l-5.2 8.6A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-2.9L14 9.5v-6 M7.4 15.5h9.2"/></svg></button>
+      <button id="btnSound" title="Ton"><svg viewBox="0 0 24 24"><path d="M5 9h3l4-4v14l-4-4H5z M15.5 8.5a5 5 0 0 1 0 7 M18 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+      <button id="btnHelp" title="Hilfe"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7 M12 17h.01"/></svg></button>
+      <button id="btnMenu" title="Einstellungen"><svg viewBox="0 0 24 24"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div id="prayers"></div>
+<div id="hint"></div>
+
+<aside id="left">
+  <div class="phead"><h2>Inselbuch</h2><button class="close" title="Schließen">×</button></div>
+  <div class="tabs"></div>
+  <div class="body"></div>
+</aside>
+
+<aside id="chron">
+  <div class="phead"><h2>Chronik</h2><button class="close" title="Schließen">×</button></div>
+  <div class="filters"></div>
+  <div class="list"></div>
+</aside>
+
+<div id="inspector"></div>
+<div id="ticker"></div>
+<nav id="dock"></nav>
+<div id="toasts"></div>
+<div id="modal"></div>
+
+<div id="locked"><div class="mbox"><h2>Die Insel lebt in einem anderen Tab</h2><p>Damit die Zeit nicht doppelt läuft, regiert immer nur ein Fenster.</p><div class="mbtns"><button id="takeover">Hier weiterspielen</button></div></div></div>
+
+<div id="intro">
+  <video class="bgv" src="assets/title_loop.mp4" poster="assets/title_loop.webp" autoplay muted loop playsinline preload="auto"></video>
+  <div class="shade"></div>
+  <div class="inner">
+    <h1 class="logo"><img src="assets/logo.webp" alt="Pray For Rain"></h1>
+    <p class="tag">Du bist der Geist einer Welt voller Inseln.</p>
+    <div class="menu">
+      <button id="btnEnter" disabled>Einen Moment</button>
+      <p class="status">…</p>
+      <div class="progress"><i></i></div>
+      <button id="btnNew" class="ghost" style="display:none">Neue Insel erschaffen</button>
+      <div class="worlds"><button id="btnEarth" class="ghost">Neue Welt: Erde</button><button id="btnSwitch" class="ghost" style="display:none">Zur Erde</button><button id="btnBuild" class="ghost">Baukasten</button><button id="btnModels" class="ghost">Modell-Sammlung</button></div>
+      <button id="btnIntro" class="link">Einführung ansehen</button>
+    </div>
+  </div>
+  <div class="claim">Ein Spiel über Zeit, Glauben und Menschen</div>
+</div>
+
+<script>
+// Sprache vor dem ersten Bild einsetzen. Das HTML bleibt deutsch, Englisch (Standard) wird hier eingesetzt.
+// Gleiche Wahl wie src/i18n.js: localStorage 'pfr.lang' ('en' oder 'de').
+(function () {
+  var lang = 'en';
+  try { lang = localStorage.getItem('pfr.lang') || 'en'; } catch (e) { /* ohne Speicher bleibt Englisch */ }
+  if (lang !== 'de') lang = 'en';
+  document.documentElement.lang = lang;
+  if (lang === 'de') return;
+  // [Selektor, 'text' | 'html' | Attributname, Englisch]
+  var T = [
+    ['meta[name="description"]', 'content', 'A sea full of islands, many peoples, and you as the spirit of this world. The world keeps living, even when you leave.'],
+    ['#date', 'text', 'Year 1'],
+    ['#era', 'text', 'Arrival'],
+    ['#top .chips .chip:nth-child(1) > span', 'text', 'People'],
+    ['#top .chips .chip:nth-child(2) > span', 'text', 'Settlements'],
+    ['#top .chips .chip:nth-child(3) > span', 'text', 'Faith'],
+    ['#top .chip.research', 'title', 'What the people are thinking about'],
+    ['#resName', 'text', 'Fire'],
+    ['#top .mana', 'title', 'Your power grows with the faith of the people'],
+    ['#top .mlabel > span', 'text', 'Power'],
+    ['#speed button[data-s="1"]', 'title', 'Real time (1)'],
+    ['#speed button[data-s="3"]', 'title', 'Faster (2)'],
+    ['#speed button[data-s="10"]', 'title', 'Time lapse (3)'],
+    ['#fastBtn', 'title', 'Fast time lapse (4 to 8)'],
+    ['#speed button[data-s="100"]', 'title', '100 times (4)'],
+    ['#speed button[data-s="500"]', 'title', '500 times (5)'],
+    ['#speed button[data-s="1000"]', 'title', '1000 times, a year in under a second (6)'],
+    ['#speed button[data-s="10000"]', 'title', '10,000 times, about 14 years per second (7)'],
+    ['#speed button[data-s="10000"]', 'text', '10,000×'],
+    ['#speed button[data-s="100000"]', 'title', '100,000 times, as fast as the computer can (8)'],
+    ['#speed button[data-s="100000"]', 'text', '100,000×'],
+    ['#btnHero', 'title', 'My story (H)'],
+    ['#btnGhost', 'title', 'Spirit mode (G)'],
+    ['#btnMap', 'title', 'Map (M)'],
+    ['#btnFly', 'title', 'Plane (P)'],
+    ['#btnIsland', 'title', 'Island Book (I)'],
+    ['#btnChron', 'title', 'Chronicle (C)'],
+    ['#btnLab', 'title', 'Lab: experiments with epidemics, migration, faith'],
+    ['#btnSound', 'title', 'Sound'],
+    ['#btnHelp', 'title', 'Help'],
+    ['#btnMenu', 'title', 'Settings'],
+    ['#left .phead h2', 'text', 'Island Book'],
+    ['#left .close', 'title', 'Close'],
+    ['#chron .phead h2', 'text', 'Chronicle'],
+    ['#chron .close', 'title', 'Close'],
+    ['#locked h2', 'text', 'The island lives in another tab'],
+    ['#locked p', 'text', 'So that time does not run twice, only one window rules at a time.'],
+    ['#takeover', 'text', 'Play here'],
+    ['#intro .tag', 'text', 'You are the spirit of a world full of islands.'],
+    ['#intro .claim', 'text', 'A game about time, faith and people'],
+    ['#btnIntro', 'text', 'Watch the introduction'],
+    ['#btnEnter', 'text', 'One moment'],
+    ['#btnNew', 'text', 'Create a new island'],
+    ['#btnEarth', 'text', 'New World: Earth'],
+    ['#btnBuild', 'text', 'Level Editor'],
+    ['#btnModels', 'text', 'Model Collection']
+  ];
+  for (var i = 0; i < T.length; i++) {
+    var el = document.querySelector(T[i][0]);
+    if (!el) continue;
+    if (T[i][1] === 'text') el.textContent = T[i][2];
+    else if (T[i][1] === 'html') el.innerHTML = T[i][2];
+    else el.setAttribute(T[i][1], T[i][2]);
+  }
+})();
+</script>
+<script>
+// Welche Welt läuft (seit 19.10.2026): die Inselwelt (320 x 320) oder die echte Erde (2048 x 1024). Die Größe muss feststehen,
+// bevor die Module laden (src/sim/world.js liest PFR_SIZE). ?erde in der Adresse erzwingt die Erde (Tests mit ?auto&local).
+(function () {
+  var w = 'welt';
+  try { w = localStorage.getItem('pfr.world') || 'welt'; } catch (e) { /* ohne Speicher bleibt die Inselwelt */ }
+  var q = new URLSearchParams(location.search);
+  if (q.has('erde')) w = 'erde';
+  if (q.has('welt')) w = 'welt';
+  if (w === 'erde') window.PFR_SIZE = [2048, 1024];
+  // Baukasten (seit 20.10.2026): eigene Level, eigener Speicherplatz, gleiche Größe wie die Inselwelt
+  if (q.has('level')) w = 'level';
+  if (w === 'level') window.PFR_LEVEL = true;
+})();
+</script>
+<script type="module" src="src/main.js?v=202610241921"></script>
+</body>
+</html>
