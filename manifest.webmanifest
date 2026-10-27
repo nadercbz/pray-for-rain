@@ -1,0 +1,16 @@
+{
+  "name": "Pray For Rain",
+  "short_name": "Pray For Rain",
+  "description": "Du bist der Geist einer Welt voller Inseln.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#0f1c24",
+  "theme_color": "#0f1c24",
+  "lang": "de",
+  "icons": [
+    { "src": "assets/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

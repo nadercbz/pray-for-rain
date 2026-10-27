@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Pray For Rain · Erde heute</title>
+<meta name="description" content="Die Erde von heute: jedes Land, jede Stadt, 8 Milliarden Menschen. Und du bist ihr Geist.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f1c24">
+<link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=202610272302">
+<link rel="stylesheet" href="onboard.css?v=202610272302">
+<link rel="stylesheet" href="mobile.css?v=202610272302">
+<link rel="stylesheet" href="today.css?v=202610272302">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.js", "three/addons/": "./vendor/three/jsm/" } }
+</script>
+<script>
+// Die Erde hat 2048 mal 1024 Felder; die Größe muss vor den Modulen feststehen (src/sim/world.js liest PFR_SIZE)
+window.PFR_SIZE = [2048, 1024];
+try { localStorage.setItem('pfr.world', 'heute'); } catch (e) { /* egal */ }
+(function () { var l = 'en'; try { l = localStorage.getItem('pfr.lang') || 'en'; } catch (e) { /* egal */ } document.documentElement.lang = l === 'de' ? 'de' : 'en'; })();
+</script>
+</head>
+<body class="today">
+<canvas id="c"></canvas>
+<div id="labels"></div>
+
+<header id="top">
+  <div class="brand">
+    <div class="logo"><img src="assets/emblem.png" alt="">PRAY FOR RAIN</div>
+    <div class="when"><span id="date">26. Oktober 2026</span></div>
+    <div class="era-chip" id="era">Erde heute</div>
+  </div>
+  <div class="chips">
+    <div class="chip"><b id="popN">8,2 Mrd.</b><span data-de="Menschen" data-en="People">Menschen</span></div>
+    <div class="chip"><b id="ctryN">0</b><span data-de="Länder" data-en="Countries">Länder</span></div>
+    <div class="chip"><b id="faithN">0%</b><span data-de="Glaube" data-en="Faith">Glaube</span></div>
+    <div class="chip"><b id="tempN">+1,5 °C</b><span data-de="Klima" data-en="Climate">Klima</span></div>
+  </div>
+  <div class="right">
+    <div class="mana">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" class="track"/><circle cx="50" cy="50" r="44" class="fill" id="manaRing"/></svg>
+      <div class="mtxt"><b id="manaN">100</b><small>/<span id="manaMax">160</span></small></div>
+      <div class="mlabel"><span>Kraft</span></div>
+    </div>
+    <div class="seg" id="speed"><button data-s="1">1×</button><button data-s="3">3×</button><button data-s="10">10×</button><button id="fastBtn">»</button><div id="fastMenu"><button data-s="100">100×</button><button data-s="500">500×</button><button data-s="1000">1000×</button></div></div>
+    <div class="icons">
+      <button id="btnFly"><svg viewBox="0 0 24 24"><path d="M2.5 13.5l7.5-1.2L14.8 4c.5-.8 1.6-.6 1.7.3l-1 7.4 5 .9c.8.2.8 1.3 0 1.5l-5 .9 1 7.4c-.1.9-1.2 1.1-1.7.3L10 14.7l-7.5-1.2z"/></svg></button>
+      <button id="btnHome"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17 M12 3.5c2.6 2.4 3.8 5.2 3.8 8.5s-1.2 6.1-3.8 8.5c-2.6-2.4-3.8-5.2-3.8-8.5s1.2-6.1 3.8-8.5z"/></svg></button>
+      <button id="btnHero"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20c.6-4 3.3-6.5 7-6.5s6.4 2.5 7 6.5 M12 13.5v6.5"/></svg></button>
+      <button id="btnBook"><svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5C4.7 20 4 19.3 4 18.5z M13 4h5.5c.8 0 1.5.7 1.5 1.5v13c0 .8-.7 1.5-1.5 1.5H13z"/></svg></button>
+      <button id="btnNews"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z M9 9h6 M9 13h6 M9 17h4"/></svg></button>
+      <button id="btnSound"><svg viewBox="0 0 24 24"><path d="M5 9h3l4-4v14l-4-4H5z M15.5 8.5a5 5 0 0 1 0 7 M18 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+      <button id="btnMenu"><svg viewBox="0 0 24 24"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div id="cityBar"></div>
+<div id="nearCity"></div>
+<div id="prayers"></div>
+<div id="hint"></div>
+
+<aside id="left">
+  <div class="phead"><h2>Weltbuch</h2><button class="close">×</button></div>
+  <div class="tabs"></div>
+  <div class="body"></div>
+</aside>
+
+<aside id="chron">
+  <div class="phead"><h2>Nachrichten</h2><button class="close">×</button></div>
+  <div class="filters"></div>
+  <div class="list"></div>
+</aside>
+
+<div id="inspector"></div>
+<div id="mapAttr">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · <a href="https://openmaptiles.org" target="_blank" rel="noopener">OpenMapTiles</a> · <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a> · <span>Mapzen Terrain (AWS)</span></div>
+<div id="ticker"></div>
+<nav id="dock"></nav>
+<div id="toasts"></div>
+<div id="modal"></div>
+
+<div id="intro">
+  <video class="bgv" src="assets/title_loop.mp4" poster="assets/title_loop.webp" autoplay muted loop playsinline preload="auto"></video>
+  <div class="shade"></div>
+  <div class="inner">
+    <h1 class="logo"><img src="assets/logo.webp" alt="Pray For Rain"></h1>
+    <p class="tag">Die Erde von heute.</p>
+    <div class="menu">
+      <button id="btnEnter" disabled>Einen Moment</button>
+      <p class="status">…</p>
+      <div class="progress"><i></i></div>
+      <button id="btnNew" class="ghost" style="display:none">Neu</button>
+      <div class="worlds"><button id="btnWorlds" class="ghost">Zu den anderen Welten</button></div>
+    </div>
+  </div>
+  <div class="claim">Stand 26. Oktober 2026</div>
+</div>
+<script>
+(function () { var en = document.documentElement.lang !== 'de'; document.querySelectorAll('[data-en]').forEach(function (e) { e.textContent = en ? e.dataset.en : e.dataset.de; }); })();
+</script>
+<script type="module" src="src/today/app.js?v=202610272302"></script>
+</body>
+</html>

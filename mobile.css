@@ -1,0 +1,195 @@
+/* Handy und Tablet (seit 20.10.2026, Naders Wunsch: "mobil perfekt"). Wird nach styles.css und onboard.css geladen.
+   body.touch setzt src/ui/touch.js auf Geräten mit Finger statt Maus. Hochkant (bis 760 px breit): Kopfleiste in zwei
+   Reihen, Inselbuch, Chronik und Personenkarte als Blätter von unten, kleinere Karten. Quer (bis 520 px hoch): eine Reihe
+   oben, Panele an den Seiten. Im Geistmodus und im Flug liegen Stick und Knöpfe über dem Bild. */
+
+html, body { overscroll-behavior: none; }
+body.touch { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+body.touch input, body.touch textarea { -webkit-user-select: text; user-select: text; }
+@supports (height: 100dvh) {
+  #c { height: 100dvh; }
+  .mbox { max-height: calc(100dvh - 40px); }
+}
+
+/* ---------- Finger statt Maus ---------- */
+body.touch .card:hover { transform: none; }
+body.touch .card.active { transform: none; }
+body.touch .ctip { display: none; }
+body.touch #hint.show { pointer-events: auto; cursor: pointer; }
+body.touch #hint kbd { background: rgba(0, 0, 0, 0.2); padding: 2px 8px; }
+body.touch #ghostHelp, body.touch #ghostLock { display: none !important; }
+body.touch .cards { padding-top: 12px; }
+body.touch.ghost-mode #dock .card .ckey { display: none; }   /* Tastennummern braucht am Handy niemand */
+body.touch.left-open #prayers, body.touch.chron-open #prayers, body.touch:has(#inspector.show) #prayers { opacity: 0; pointer-events: none; }
+
+/* ---------- Stick und Knöpfe ---------- */
+.tpad { display: none; position: fixed; inset: 0; pointer-events: none; z-index: 18; --padB: calc(150px + env(safe-area-inset-bottom)); }
+#tcFly { --padB: calc(24px + env(safe-area-inset-bottom)); z-index: 31; }
+#tcDrive { --padB: calc(24px + env(safe-area-inset-bottom)); z-index: 31; }
+body.touch.ghost-mode #tcGhost, body.touch.flight-mode #tcFly, body.touch.drive-mode #tcDrive { display: block; }
+.tbtns.drive { grid-template-columns: 58px 58px 58px; grid-template-rows: 58px 58px; grid-template-areas: none; gap: 8px; }
+.tbtns.drive .tbtn { width: 58px; height: 58px; grid-area: auto; }
+.tbtns.drive .tbtn.gas { background: rgba(40, 90, 50, 0.6); }
+.tbtns.drive .tbtn.out { background: rgba(90, 22, 26, 0.6); }
+.tpad > * { pointer-events: auto; touch-action: none; }
+.tstick { position: absolute; left: calc(16px + env(safe-area-inset-left)); bottom: var(--padB); width: 128px; height: 128px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(13, 24, 31, 0.16), rgba(13, 24, 31, 0.44)); border: 1px solid rgba(255, 217, 138, 0.35);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: inset 0 0 0 9px rgba(255, 255, 255, 0.035); }
+.tstick::after { content: ''; position: absolute; inset: 30%; border-radius: 50%; border: 1px dashed rgba(255, 217, 138, 0.22); pointer-events: none; }
+.tstick i { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; z-index: 1;
+  background: radial-gradient(circle at 35% 30%, #fff6e0, #e9b44c 72%); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(255, 217, 138, 0.25); transition: transform 0.14s; }
+.tstick.on i { transition: none; }
+.tstick.on { border-color: rgba(255, 217, 138, 0.7); }
+.tbtns { position: absolute; right: calc(14px + env(safe-area-inset-right)); bottom: var(--padB); display: grid; grid-template-columns: 62px 74px; grid-template-rows: 62px 74px;
+  grid-template-areas: ". look" "jump cast"; gap: 10px; align-items: end; justify-items: end; }
+.tbtn { width: 62px; height: 62px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  background: rgba(13, 24, 31, 0.5); border: 1px solid rgba(255, 217, 138, 0.38); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: var(--paper); font: 700 9px var(--sans); letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); transition: transform 0.1s, background 0.15s; }
+.tbtn svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tbtn.on { background: rgba(233, 180, 76, 0.88); color: #251a06; transform: scale(0.93); }
+.tbtn.cast { grid-area: cast; width: 74px; height: 74px; background: radial-gradient(circle at 40% 30%, rgba(217, 96, 76, 0.75), rgba(90, 22, 26, 0.75)); border-color: rgba(255, 190, 160, 0.55); }
+.tbtn.cast svg { width: 28px; height: 28px; }
+.tbtn.jump { grid-area: jump; }
+.tbtn.look { grid-area: look; }
+.tbtn.look:not(.ready) { opacity: 0.45; }
+.tbtn.look.ready { border-color: var(--gold2); box-shadow: 0 0 16px rgba(233, 180, 76, 0.55); }
+/* Flug: Gas rechts, daneben Turbo, Kamera, Flughilfe, Aussteigen */
+.tthr { position: absolute; right: calc(14px + env(safe-area-inset-right)); bottom: var(--padB); width: 50px; height: 170px; border-radius: 25px; overflow: hidden;
+  background: rgba(13, 24, 31, 0.5); border: 1px solid rgba(255, 217, 138, 0.38); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.tthr b { position: absolute; left: 0; right: 0; bottom: 0; height: 0; background: linear-gradient(#ffd98a, #e9b44c); opacity: 0.85; }
+.tthr span { position: absolute; left: 0; right: 0; top: 10px; text-align: center; font: 700 9px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper); z-index: 1; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6); }
+.tbtns.fly { right: calc(76px + env(safe-area-inset-right)); grid-template-columns: 56px 56px; grid-template-rows: 56px 56px; grid-template-areas: none; gap: 8px; }
+.tbtns.fly .tbtn { width: 56px; height: 56px; grid-area: auto; }
+.tbtns.fly .tbtn.assist.ready { border-color: var(--gold2); color: var(--gold2); }
+.tbtns.fly .tbtn.out { background: rgba(90, 22, 26, 0.6); }
+body.touch #flightHud .fh-panel { bottom: auto; top: calc(112px + env(safe-area-inset-top)); transform: translateX(-50%) scale(0.84); transform-origin: top center; }
+body.touch #flightHud .fh-mode, body.touch #flightHud .fh-keys { display: none; }
+body.touch.ghost-mode #prayers, body.touch.ghost-mode #ticker, body.touch.flight-mode #ticker, body.touch.drive-mode #ticker { opacity: 0; pointer-events: none; }
+body.touch.ghost-mode #toasts { bottom: calc(300px + env(safe-area-inset-bottom)); }
+
+/* ---------- Hochkant ---------- */
+@media (max-width: 760px) {
+  #top { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "brand speed mana" "icons icons icons"; align-items: center; gap: 8px;
+    padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 8px max(10px, env(safe-area-inset-left)); }
+  #top .brand { grid-area: brand; justify-self: start; max-width: 100%; min-width: 0; padding: 5px 11px; gap: 8px; overflow: hidden; }
+  .brand .when { min-width: 0; overflow: hidden; font-size: 12px; }
+  .brand .when > * { overflow: hidden; text-overflow: ellipsis; }
+  .brand .when #clock { font-size: 10.5px; }
+  .era-chip { display: none; }   /* die Epoche steht im Inselbuch, oben bleibt Platz für Datum und Uhrzeit */
+  #top .right { display: contents; }
+  #top .mana { grid-area: mana; padding: 3px; }
+  .mana svg { width: 40px; height: 40px; }
+  .mana .mtxt { left: 3px; top: 3px; width: 40px; height: 40px; }
+  .mana .mtxt b { font-size: 12.5px; }
+  .mana .mtxt small { font-size: 8px; }
+  #speed { grid-area: speed; }
+  .seg button { padding: 6px 8px; font-size: 12px; }
+  .icons { grid-area: icons; justify-content: space-between; gap: 4px; }
+  .icons button { width: 36px; height: 36px; }
+  .icons svg { width: 18px; height: 18px; }
+
+  #prayers { top: calc(108px + env(safe-area-inset-top)); width: calc(100vw - 20px); gap: 5px; }
+  .prayer { padding: 6px 10px 6px 6px; gap: 8px; }
+  .prayer img { width: 36px; height: 36px; border-radius: 8px; }
+  .prayer b { font-size: 11.5px; }
+  .prayer span { font-size: 12.5px; margin: 1px 0 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #hint { top: calc(108px + env(safe-area-inset-top)); max-width: calc(100vw - 24px); white-space: normal; text-align: center; font-size: 13px; padding: 9px 14px; border-radius: 16px; }
+  body.left-open #prayers, body.chron-open #prayers, body:has(#inspector.show) #prayers { opacity: 0; pointer-events: none; }
+
+  /* Inselbuch und Chronik: Blätter von unten */
+  #left, #chron { left: 0; right: 0; width: auto; top: auto; bottom: 0; height: min(66vh, calc(100vh - 118px)); z-index: 24; border-radius: 22px 22px 0 0; padding-bottom: env(safe-area-inset-bottom); }
+  @supports (height: 100dvh) { #left, #chron { height: min(66dvh, calc(100dvh - 118px)); } }
+  #left, #chron { transform: translateY(104%); }
+  body.left-open #left, body.chron-open #chron { transform: none; }
+  #left::after, #chron::after { content: ''; position: absolute; left: 50%; top: 7px; width: 42px; height: 4px; margin-left: -21px; border-radius: 4px; background: currentColor; opacity: 0.22; }
+  .phead { padding: 18px 16px 8px; }
+  .phead .close { width: 38px; height: 38px; font-size: 24px; }
+  .list, #left .body { padding: 4px 14px calc(18px + env(safe-area-inset-bottom)); -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  body.left-open #dock, body.chron-open #dock, body:has(#inspector.show) #dock { opacity: 0; pointer-events: none; }
+
+  /* Personen und Gebäude: Karte von unten */
+  #inspector, body.left-open #inspector { left: 0; right: 0; width: auto; bottom: 0; max-height: 60vh; z-index: 25; border-radius: 22px 22px 0 0; padding: 18px 16px calc(16px + env(safe-area-inset-bottom)); overscroll-behavior: contain; }
+  #inspector .x { width: 38px; height: 38px; font-size: 24px; right: 8px; top: 6px; }
+  .iact { flex-wrap: wrap; }
+  .iact button { flex: 1 1 auto; padding: 11px 14px; }
+
+  #ticker { left: 10px; right: 10px; width: auto; bottom: calc(150px + env(safe-area-inset-bottom)); }
+  #ticker .tk.old { display: none; }
+  #ticker .tk { font-size: 12.5px; padding: 7px 11px; }
+  #toasts { bottom: calc(150px + env(safe-area-inset-bottom)); width: calc(100vw - 20px); }
+
+  /* Karten unten */
+  #dock, body.ghost-mode #dock { bottom: calc(8px + env(safe-area-inset-bottom)); gap: 6px; max-width: calc(100vw - 12px); }
+  .dock-tabs { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .dock-tabs::-webkit-scrollbar { display: none; }
+  .dtab { padding: 5px 12px; font-size: 13px; white-space: nowrap; }
+  .cards { gap: 8px; padding: 8px; border-radius: 18px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  .card { width: 64px; height: 86px; scroll-snap-align: start; }
+  .card img, .card::after { border-radius: 11px; }
+  .cname { font-size: 10.5px; }
+  .ccost { min-width: 20px; height: 20px; font-size: 10.5px; }
+  body.touch.ghost-mode .cards { padding-top: 8px; }
+
+  /* Fenster */
+  #modal, #locked { padding: 12px; }
+  .mbox { padding: 20px 18px; border-radius: 18px; }
+  .mbox h2 { font-size: 23px; }
+  .mart { width: 84px; height: 112px; margin: 0 0 8px 12px; }
+  /* Fluganzeige: nur das Wichtigste (Gas zeigt der Regler rechts) */
+  body.touch #flightHud .fh-panel { gap: 10px; padding: 8px 14px; }
+  body.touch #flightHud .fh-panel > :nth-child(6), body.touch #flightHud .fh-panel > :nth-child(7), body.touch #flightHud .fh-panel > :nth-child(8),
+  body.touch #flightHud .fh-panel > :nth-child(10), body.touch #flightHud .fh-panel > :nth-child(11) { display: none; }
+}
+
+/* sehr schmal (kleine iPhones) */
+@media (max-width: 380px) {
+  .seg button { padding: 6px 6px; }
+  .icons button { width: 34px; height: 34px; }
+  .card { width: 58px; height: 78px; }
+  .tstick { width: 118px; height: 118px; }
+}
+
+/* ---------- Quer ---------- */
+@media (max-height: 520px) and (pointer: coarse), (max-height: 520px) and (hover: none) {
+  #top { flex-wrap: nowrap; gap: 6px; padding: max(6px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 6px max(10px, env(safe-area-inset-left)); }
+  .brand { padding: 4px 10px; gap: 8px; }
+  .brand .logo, .chips { display: none; }
+  .mana { padding: 3px; }
+  .mana .mlabel { display: none; }
+  .mana svg { width: 36px; height: 36px; }
+  .mana .mtxt { left: 3px; top: 3px; width: 36px; height: 36px; }
+  .mana .mtxt b { font-size: 12px; }
+  .seg button { padding: 5px 8px; font-size: 12px; }
+  .icons { gap: 4px; }
+  .icons button { width: 34px; height: 34px; }
+  #prayers { top: calc(54px + env(safe-area-inset-top)); width: min(420px, 50vw); }
+  .prayer img { width: 34px; height: 34px; }
+  .prayer span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 1px 0 3px; }
+  #hint { top: calc(54px + env(safe-area-inset-top)); }
+  #left, #chron { top: calc(54px + env(safe-area-inset-top)); bottom: max(8px, env(safe-area-inset-bottom)); width: min(372px, 46vw); }
+  #left { left: max(8px, env(safe-area-inset-left)); }
+  #chron { right: max(8px, env(safe-area-inset-right)); left: auto; }
+  #inspector, body.left-open #inspector { left: auto; right: max(8px, env(safe-area-inset-right)); bottom: max(8px, env(safe-area-inset-bottom)); width: min(350px, 46vw); max-height: calc(100vh - 66px); }
+  body.left-open #dock, body.chron-open #dock, body:has(#inspector.show) #dock { opacity: 0; pointer-events: none; }
+  #dock, body.ghost-mode #dock { bottom: max(6px, env(safe-area-inset-bottom)); gap: 5px; }
+  .dtab { padding: 4px 12px; font-size: 12.5px; }
+  .cards { padding: 6px; gap: 7px; }
+  .card { width: 56px; height: 76px; }
+  .cname { font-size: 10px; }
+  #ticker { bottom: 124px; width: 300px; }
+  #ticker .tk.old { display: none; }
+  #toasts { bottom: 124px; }
+  .tpad, #tcFly, #tcDrive { --padB: calc(12px + env(safe-area-inset-bottom)); }
+  .tstick { width: 116px; height: 116px; }
+  .tbtns { grid-template-columns: 54px 66px; grid-template-rows: 54px 66px; gap: 8px; }
+  .tbtn { width: 54px; height: 54px; }
+  .tbtn.cast { width: 66px; height: 66px; }
+  .tthr { height: 132px; }
+  .tbtns.fly { grid-template-columns: 52px 52px; grid-template-rows: 52px 52px; }
+  .tbtns.fly .tbtn { width: 52px; height: 52px; }
+  body.touch.ghost-mode #dock { max-width: calc(100vw - 2 * (150px + env(safe-area-inset-left))); }
+  body.touch.ghost-mode #toasts { bottom: 150px; }
+  body.touch.ghost-mode #ghostPrompt:not(:empty) { transform: translate(-50%, 40px); }
+  body.touch #flightHud .fh-panel { top: calc(52px + env(safe-area-inset-top)); transform: translateX(-50%) scale(0.74); }
+  .mbox { padding: 16px 18px; }
+}

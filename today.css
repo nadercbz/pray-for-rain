@@ -1,0 +1,140 @@
+/* Erde heute (seit 26.10.2026): Ergänzungen zu styles.css, onboard.css, mobile.css. Frei stehend und minimalistisch wie das übrige Spiel. */
+body.today #hint:not(:empty) { opacity: 1; transform: translate(-50%, 0); }
+body.today .cityonly { display: none; }
+body.today.in-city .cityonly { display: inline-flex; }
+
+/* Namensschilder auf dem Globus und in der Stadt: Lage nur über transform, damit nichts neu gesetzt werden muss */
+#labels .gl, #labels .kl, #labels .cl { position: absolute; left: 0; top: 0; will-change: transform; white-space: nowrap; pointer-events: none; color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); font-family: var(--sans); }
+#labels .gl { font-size: 12px; font-weight: 600; pointer-events: auto; cursor: pointer; padding: 2px 6px; }
+#labels .gl::before { content: ''; display: inline-block; width: 5px; height: 5px; margin-right: 5px; border-radius: 50%; background: #ffe7b0; box-shadow: 0 0 6px rgba(255, 210, 140, 0.9); vertical-align: middle; }
+#labels .gl.cap { font-weight: 700; }
+#labels .gl.cap::before { width: 7px; height: 7px; background: #fff; border: 1.5px solid var(--gold2); box-sizing: border-box; }
+#labels .gl.mega { font-size: 14px; font-family: var(--serif); }
+#labels .kl { font-size: 13px; letter-spacing: 0.32em; font-weight: 700; color: rgba(255, 250, 238, 0.82); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45); }
+#labels .cl.place { font-size: 14px; letter-spacing: 0.06em; font-weight: 700; }
+#labels .cl.lm { font-size: 13px; font-weight: 700; color: #ffe7b0; }
+#labels .cl.poi { font-size: 11px; opacity: 0.92; }
+#labels .cl.hero { font-size: 13px; font-weight: 800; color: #ffd97a; }
+#labels .cl.water { font-size: 12px; font-style: italic; color: #e3f2ff; }
+
+/* Stadt: Leiste oben mit Name und Rückweg */
+#cityBar { position: fixed; top: 82px; left: 50%; transform: translateX(-50%); z-index: 14; display: flex; align-items: center; gap: 10px; }
+#cityBar:empty { display: none; }
+#cityBar > div { text-align: center; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5); }
+#cityBar b { display: block; font-family: var(--serif); font-size: 22px; }
+#cityBar small { font-size: 11.5px; opacity: 0.85; }
+#cityBar button { padding: 7px 13px; border-radius: 999px; font-weight: 700; font-size: 13px; color: var(--paper); background: rgba(13, 24, 31, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); }
+#cityAttrib { position: fixed; right: 10px; bottom: 6px; z-index: 9; font-size: 10px; color: rgba(255, 255, 255, 0.75); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); }
+#cityAttrib a { color: inherit; }
+#nearCity { position: fixed; left: 50%; bottom: 186px; transform: translate(-50%, 10px); opacity: 0; pointer-events: none; transition: 0.3s; z-index: 15; }
+#nearCity.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+#nearCity button { padding: 10px 18px; border-radius: 999px; font-weight: 700; color: #251a06; background: rgba(233, 180, 76, 0.94); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+#nearCity small { font-weight: 600; opacity: 0.7; margin-left: 6px; }
+
+/* Weltbuch */
+.tbook { padding: 4px 4px 18px; font-size: 13px; }
+.tbook h3 { font-family: var(--serif); font-size: 22px; margin: 4px 0 2px; }
+.tbook h3.flagh .flag { margin-right: 8px; }
+.tbook h4 { margin: 16px 0 6px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.tbook .sub { margin: 0 0 10px; color: var(--muted); }
+.tbook .sub a, #inspector a { color: var(--gold2); cursor: pointer; }
+.tbook .kv, #inspector .kv { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px solid rgba(246, 239, 226, 0.08); }
+.tbook .kv span, #inspector .kv span { color: var(--muted); }
+.tbook .kv b, #inspector .kv b { text-align: right; }
+.tbook .note, #inspector .note { font-size: 11.5px; color: var(--muted); font-style: italic; margin: 8px 0; }
+.tl { list-style: none; margin: 0; padding: 0; }
+.tl li { padding: 6px 2px; border-bottom: 1px solid rgba(246, 239, 226, 0.07); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tl li small { color: var(--muted); }
+.tl.log li { display: block; cursor: default; line-height: 1.4; }
+.tsearch { width: 100%; box-sizing: border-box; padding: 9px 13px; border-radius: 12px; border: 1px solid var(--line); background: rgba(0, 0, 0, 0.2); color: inherit; font: inherit; margin: 6px 0 8px; outline: none; }
+.mbox .tsearch { background: rgba(43, 38, 32, 0.06); border-color: rgba(43, 38, 32, 0.2); color: var(--ink); }
+.sortrow { display: flex; gap: 6px; margin-bottom: 6px; }
+.sortrow button, .mini { padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 600; border: 1px solid var(--line); color: var(--muted); }
+.sortrow button.on { background: var(--paper); color: var(--ink); }
+.mini:hover { color: var(--paper); border-color: var(--gold2); }
+.back { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+#inspector h3 { font-family: var(--serif); font-size: 21px; margin: 0 26px 2px 0; }
+#inspector h4 { margin: 12px 0 6px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+#inspector .sub { margin: 0 0 8px; color: var(--muted); font-size: 12.5px; }
+#inspector .btns { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+#inspector .btns button { padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: 12.5px; border: 1px solid var(--line); }
+#inspector .btns .go { background: var(--gold2); color: #251a06; border-color: transparent; }
+#inspector .lms { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Startwahl */
+.mbox.wide { width: min(640px, 92vw); }
+.picks { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 4px; max-height: 46vh; overflow-y: auto; }
+.picks .pick { padding: 8px 14px; border-radius: 12px; font-weight: 700; border: 1px solid rgba(43, 38, 32, 0.2); color: var(--ink); text-align: left; }
+.picks .pick small { display: block; font-weight: 500; font-size: 11px; opacity: 0.65; }
+.picks .pick:hover { border-color: var(--pink); background: rgba(43, 38, 32, 0.05); }
+.pcards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 10px 0; }
+.pcard { padding: 14px; border-radius: 16px; text-align: left; border: 1px solid rgba(43, 38, 32, 0.18); color: var(--ink); background: rgba(255, 255, 255, 0.35); }
+.pcard b { display: block; font-family: var(--serif); font-size: 18px; }
+.pcard span { display: block; margin: 3px 0; font-size: 13px; }
+.pcard small { font-size: 11.5px; opacity: 0.7; }
+.pcard:hover { border-color: var(--pink); transform: translateY(-2px); }
+.mrow { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(43, 38, 32, 0.1); }
+.mrow button { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(43, 38, 32, 0.25); font-weight: 600; color: var(--ink); }
+#chron .ce { padding: 9px 4px; border-bottom: 1px solid rgba(43, 38, 32, 0.1); cursor: pointer; }
+#chron .ce small { font-size: 10.5px; font-weight: 700; opacity: 0.55; font-family: var(--sans); }
+#chron .ce p { margin: 2px 0 0; font-family: var(--serif); font-size: 14px; line-height: 1.4; }
+#chron .ce.big p { font-weight: 600; }
+body.aiming #c { cursor: crosshair; }
+@media (max-width: 760px) {
+  #cityBar { top: 64px; }
+  #cityBar b { font-size: 18px; }
+  .pcards { grid-template-columns: 1fr; }
+  #nearCity { bottom: 160px; }
+}
+@media (max-width: 1150px) { body.left-open #cityBar, body.chron-open #cityBar { display: none; } }
+body.today #modal { z-index: 70; }
+body.today:not(.playing) #dock, body.today:not(.playing) #ticker, body.today:not(.playing) #prayers { display: none; }
+/* seit 27.10.2026: die Ortsleiste steht immer oben, die Gebete rutschen darunter */
+body.today.playing #prayers { top: 144px; }
+@media (max-width: 760px) { body.today.playing #prayers { top: calc(118px + env(safe-area-inset-top)); } }
+/* Bevölkerungsgruppen im Länderbuch (seit 27.10.2026) */
+.tbook h5 { margin: 14px 0 6px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em; opacity: 0.8; }
+.tbook h5 small.est, .tbook small.est { font-weight: 600; opacity: 0.6; font-size: 10.5px; }
+.gbar { display: grid; grid-template-columns: minmax(0, 1fr) 90px 46px; align-items: center; gap: 8px; font-size: 12.5px; margin: 3px 0; }
+.gbar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gbar i { display: block; height: 7px; border-radius: 4px; background: #c7903a; justify-self: start; max-width: 90px; }
+.gbar.rel i { background: #6f8fb0; }
+.gbar.new i { background: #8aa86a; }
+.gbar b { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ages { display: flex; gap: 3px; margin: 6px 0 10px; }
+.ages > div { min-width: 46px; padding: 6px 7px; border-radius: 8px; background: rgba(199, 144, 58, 0.16); display: flex; flex-direction: column; }
+.ages > div:nth-child(2) { background: rgba(199, 144, 58, 0.28); }
+.ages > div:nth-child(3) { background: rgba(111, 143, 176, 0.28); }
+.ages b { font-size: 14px; } .ages small { font-size: 10.5px; opacity: 0.7; }
+body.today.playing #hint { top: 140px; }
+body.today.aiming #prayers { opacity: 0; pointer-events: none; }
+@media (max-width: 760px) { body.today.playing #hint { top: calc(116px + env(safe-area-inset-top)); } }
+#cityBar button { white-space: nowrap; }
+@media (max-width: 760px) {
+  #cityBar { top: calc(100px + env(safe-area-inset-top)); gap: 8px; max-width: calc(100vw - 20px); }
+  #cityBar b { font-size: 17px; white-space: nowrap; }
+  #cityBar small { font-size: 10.5px; white-space: nowrap; }
+  #cityBar button { padding: 6px 10px; font-size: 12px; }
+  body.today.playing #prayers { top: calc(152px + env(safe-area-inset-top)); }
+  body.today.playing #hint { top: calc(150px + env(safe-area-inset-top)); }
+}
+/* Quellenhinweis der Karten (Pflicht bei OpenStreetMap und OpenMapTiles) */
+#mapAttr { position: fixed; right: 8px; bottom: 4px; z-index: 12; font-size: 10px; color: rgba(255, 255, 255, 0.72); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); pointer-events: auto; }
+#mapAttr a { color: inherit; text-decoration: none; }
+body.today:not(.playing) #mapAttr { display: none; }
+@media (max-width: 760px) { #mapAttr { font-size: 8.5px; right: 4px; bottom: calc(2px + env(safe-area-inset-bottom)); } #mapAttr span { display: none; } }
+/* Fliegen auf der Erde (seit 27.10.2026): Handy Steuerung, im Flug ruhige Oberfläche */
+body.today.tflight.flight-mode #tcFly { display: block; }
+body.today.flight-mode #prayers, body.today.flight-mode #ticker, body.today.flight-mode #cityBar, body.today.flight-mode #hint, body.today.flight-mode #inspector { display: none !important; }
+body.today #btnFly.on { color: var(--gold2, #e9b44c); }
+/* Fluganzeige am Handy wie auf den Inseln (mobile.css fragt body.touch ab, die Erde setzt body.tflight) */
+body.today.tflight #flightHud .fh-panel { bottom: auto; top: calc(112px + env(safe-area-inset-top)); transform: translateX(-50%) scale(0.84); transform-origin: top center; }
+body.today.tflight #flightHud .fh-mode, body.today.tflight #flightHud .fh-keys { display: none; }
+@media (max-width: 760px) {
+  body.today.tflight #flightHud .fh-panel { gap: 10px; padding: 8px 14px; }
+  body.today.tflight #flightHud .fh-panel > :nth-child(6), body.today.tflight #flightHud .fh-panel > :nth-child(7), body.today.tflight #flightHud .fh-panel > :nth-child(8),
+  body.today.tflight #flightHud .fh-panel > :nth-child(10), body.today.tflight #flightHud .fh-panel > :nth-child(11) { display: none; }
+}
+@media (max-height: 520px) and (pointer: coarse), (max-height: 520px) and (hover: none) {
+  body.today.tflight #flightHud .fh-panel { top: calc(52px + env(safe-area-inset-top)); transform: translateX(-50%) scale(0.74); }
+}
