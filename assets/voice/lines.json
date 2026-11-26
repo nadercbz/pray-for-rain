@@ -1,0 +1,405 @@
+{
+ "_info": "Sprechertexte im Spiel. Englisch: Higgsfield Soraya (seed_audio Preset 5c1d2f7f-cdb4-5b1d-bca9-156439e3275e), Deutsch: Edge TTS de-DE-SeraphinaMultilingualNeural. Bauen: python3 tools/build_voice.py. Dateien: assets/voice/{en,de}/<id>.mp3. Job IDs der englischen Fassung in jobs_en.",
+ "lines": [
+  {
+   "id": "sp1",
+   "en": "You are not a god. You are the spirit of this world.",
+   "de": "Du bist kein Gott. Du bist der Geist dieser Welt."
+  },
+  {
+   "id": "sp2",
+   "en": "You are the wind and the water, the rain and the snow. You shape the land, and you can walk into their dreams.",
+   "de": "Du bist der Wind und das Wasser, der Regen und der Schnee. Du formst das Land, und du kannst in ihre Träume gehen."
+  },
+  {
+   "id": "sp3",
+   "en": "They cannot see you. They only feel you, and they will try to understand you.",
+   "de": "Sie können dich nicht sehen. Sie spüren dich nur, und sie versuchen, dich zu verstehen."
+  },
+  {
+   "id": "pk1",
+   "en": "Whose life will you live? As the spirit, you see everything. But one life, you live up close. Choose one of the castaways. When they die, their children carry the story on.",
+   "de": "Wessen Leben lebst du? Als Geist siehst du alles. Aber ein Leben erlebst du ganz nah. Wähle einen der Gestrandeten. Stirbt er, erzählen seine Kinder weiter."
+  },
+  {
+   "id": "hi_start",
+   "en": "This is where your story begins.",
+   "de": "Hier beginnt deine Geschichte."
+  },
+  {
+   "id": "bs_mut_0",
+   "en": "You were the first to set foot ashore when the boat broke apart.",
+   "de": "Als das Boot zerbrach, hast du als Erstes den Fuß an Land gesetzt."
+  },
+  {
+   "id": "bs_mut_1",
+   "en": "When the ship went down, you pulled two children from the waves.",
+   "de": "Als das Schiff sank, hast du zwei Kinder aus den Wellen gezogen."
+  },
+  {
+   "id": "bs_fleiss_0",
+   "en": "On the very first evening, you built a hut of driftwood.",
+   "de": "Schon am ersten Abend hast du eine Hütte aus Treibholz gebaut."
+  },
+  {
+   "id": "bs_fleiss_1",
+   "en": "You rise before everyone else, and you are the last to lie down.",
+   "de": "Du stehst vor allen anderen auf und legst dich als Letztes hin."
+  },
+  {
+   "id": "bs_glaube_0",
+   "en": "You believe someone watches over this island. At night, you talk to the sky.",
+   "de": "Du glaubst, dass jemand über diese Insel wacht. Nachts sprichst du mit dem Himmel."
+  },
+  {
+   "id": "bs_glaube_1",
+   "en": "In the storm, you saw a light that no one else saw.",
+   "de": "Im Sturm hast du ein Licht gesehen, das sonst niemand sah."
+  },
+  {
+   "id": "bs_neugier_0",
+   "en": "You want to know what lies beyond every hill.",
+   "de": "Du willst wissen, was hinter jedem Hügel liegt."
+  },
+  {
+   "id": "bs_neugier_1",
+   "en": "You collect shells, stones and stories.",
+   "de": "Du sammelst Muscheln, Steine und Geschichten."
+  },
+  {
+   "id": "bs_wut_0",
+   "en": "You are quick to quarrel, and slow to forgive.",
+   "de": "Du streitest schnell und vergibst langsam."
+  },
+  {
+   "id": "bs_wut_1",
+   "en": "On the ship, you started a fight that nearly cost everyone their lives.",
+   "de": "Auf dem Schiff hast du einen Streit begonnen, der fast alle das Leben gekostet hätte."
+  },
+  {
+   "id": "bs_charisma_0",
+   "en": "When you speak, everyone listens.",
+   "de": "Wenn du sprichst, hören alle zu."
+  },
+  {
+   "id": "bs_charisma_1",
+   "en": "On the beach, you made the desperate laugh again.",
+   "de": "Am Strand hast du die Verzweifelten wieder zum Lachen gebracht."
+  },
+  {
+   "id": "bs_kunst_0",
+   "en": "You sing songs of the sunken land you all came from.",
+   "de": "Du singst Lieder über das versunkene Land, aus dem ihr alle kamt."
+  },
+  {
+   "id": "bs_kunst_1",
+   "en": "You carve little figures from whatever the sea washes ashore.",
+   "de": "Du schnitzt kleine Figuren aus allem, was das Meer anspült."
+  },
+  {
+   "id": "hi_end",
+   "en": "Your diary is open. Whenever you want to look back, press H.",
+   "de": "Dein Tagebuch ist offen. Wenn du zurückblicken willst, drück H."
+  },
+  {
+   "id": "ev_love",
+   "en": "You have fallen in love. You can't stop thinking about them.",
+   "de": "Du hast dich verliebt. Du kannst an nichts anderes mehr denken."
+  },
+  {
+   "id": "ev_wed",
+   "en": "Today you got married. The whole village came to the feast.",
+   "de": "Heute hast du geheiratet. Das ganze Dorf kam zum Fest."
+  },
+  {
+   "id": "ev_child",
+   "en": "A child was born to you. Everything feels different now.",
+   "de": "Ein Kind ist dir geboren. Alles fühlt sich jetzt anders an."
+  },
+  {
+   "id": "ev_quarrel",
+   "en": "A bitter quarrel. Some words can never be taken back.",
+   "de": "Ein bitterer Streit. Manche Worte kann man nie zurücknehmen."
+  },
+  {
+   "id": "ev_crisis",
+   "en": "Something is wrong at home. The silence between you grows louder.",
+   "de": "Zu Hause stimmt etwas nicht. Das Schweigen zwischen euch wird lauter."
+  },
+  {
+   "id": "ev_divorce",
+   "en": "You have gone separate ways. The house feels empty now.",
+   "de": "Ihr geht getrennte Wege. Das Haus fühlt sich leer an."
+  },
+  {
+   "id": "ev_widow",
+   "en": "The one you loved is gone. The island is so quiet without them.",
+   "de": "Der Mensch, den du geliebt hast, ist fort. Die Insel ist so still ohne ihn."
+  },
+  {
+   "id": "ev_mourn",
+   "en": "Someone close to you has died. Tonight, you light a fire for them.",
+   "de": "Jemand, der dir nahestand, ist gestorben. Heute Nacht zündest du ein Feuer für ihn an."
+  },
+  {
+   "id": "ev_war",
+   "en": "War has come. You fear for everyone you love.",
+   "de": "Der Krieg ist da. Du hast Angst um alle, die du liebst."
+  },
+  {
+   "id": "ev_battle",
+   "en": "You fought in the battle. You came home, but you are not the same.",
+   "de": "Du hast in der Schlacht gekämpft. Du bist heimgekehrt, aber nicht mehr derselbe Mensch."
+  },
+  {
+   "id": "ev_peace",
+   "en": "Peace at last. The warriors are coming home.",
+   "de": "Endlich Frieden. Die Krieger kehren heim."
+  },
+  {
+   "id": "ev_plague",
+   "en": "A sickness is spreading. Doors stay shut, and everyone prays.",
+   "de": "Eine Krankheit geht um. Die Türen bleiben zu, und alle beten."
+  },
+  {
+   "id": "ev_hunger",
+   "en": "Hunger. The stores are empty, and the children cry at night.",
+   "de": "Hunger. Die Vorräte sind leer, und nachts weinen die Kinder."
+  },
+  {
+   "id": "ev_era",
+   "en": "A new age is dawning. Your people are changing.",
+   "de": "Eine neue Zeit bricht an. Dein Volk verändert sich."
+  },
+  {
+   "id": "ev_myth",
+   "en": "Your people tell a new story about the spirit of the world. A myth is born.",
+   "de": "Dein Volk erzählt eine neue Geschichte über den Geist der Welt. Ein Mythos ist geboren."
+  },
+  {
+   "id": "ev_answered",
+   "en": "Your prayer was answered. You will never forget this day.",
+   "de": "Dein Gebet wurde erhört. Diesen Tag wirst du nie vergessen."
+  },
+  {
+   "id": "ev_dream",
+   "en": "Last night you had a strange dream. You cannot let it go.",
+   "de": "Letzte Nacht hattest du einen seltsamen Traum. Er lässt dich nicht los."
+  },
+  {
+   "id": "ev_discover",
+   "en": "You found something no one has ever seen before.",
+   "de": "Du hast etwas gefunden, das noch niemand vor dir gesehen hat."
+  },
+  {
+   "id": "ev_leader",
+   "en": "They chose you to lead. Now everyone is watching you.",
+   "de": "Sie haben dich an die Spitze gestellt. Jetzt schauen alle auf dich."
+  },
+  {
+   "id": "ev_move",
+   "en": "You leave the old place behind, and begin again.",
+   "de": "Du lässt den alten Ort hinter dir und fängst neu an."
+  },
+  {
+   "id": "ev_pirates",
+   "en": "Pirates on the coast. Lock the doors and hide the children.",
+   "de": "Piraten an der Küste. Schließt die Türen, versteckt die Kinder."
+  },
+  {
+   "id": "ev_old",
+   "en": "You have grown old. The children gather to hear your stories.",
+   "de": "Du bist alt geworden. Die Kinder kommen, um deine Geschichten zu hören."
+  },
+  {
+   "id": "ev_pass",
+   "en": "Your life has ended. But your story goes on, in the hands of the next generation.",
+   "de": "Dein Leben ist zu Ende. Aber deine Geschichte geht weiter, in den Händen der nächsten Generation."
+  },
+  {
+   "id": "ev_end",
+   "en": "Your family line has ended. Choose a new life to live.",
+   "de": "Deine Familie ist erloschen. Wähle ein neues Leben."
+  },
+  {
+   "id": "t_camera",
+   "en": "Drag to look around, and scroll to zoom. Click on any person or house to see their story.",
+   "de": "Zieh mit der Maus, um dich umzusehen, und scroll zum Zoomen. Klick auf einen Menschen oder ein Haus, um seine Geschichte zu sehen."
+  },
+  {
+   "id": "t_people",
+   "en": "Up here you see how many people live on the islands, and how many settlements they have built.",
+   "de": "Hier oben siehst du, wie viele Menschen auf den Inseln leben und wie viele Siedlungen sie gebaut haben."
+  },
+  {
+   "id": "t_faith",
+   "en": "Faith shows how much they believe in something greater. The more they believe, the stronger you grow.",
+   "de": "Der Glaube zeigt, wie sehr sie an etwas Größeres glauben. Je mehr sie glauben, desto stärker wirst du."
+  },
+  {
+   "id": "t_research",
+   "en": "And this is what they are thinking about right now: their next discovery.",
+   "de": "Und hier steht, worüber sie gerade nachdenken: ihre nächste Entdeckung."
+  },
+  {
+   "id": "t_power",
+   "en": "This ring is your power. It fills up every day, and faster when they believe in you.",
+   "de": "Dieser Ring ist deine Kraft. Er füllt sich jeden Tag, und schneller, wenn sie an dich glauben."
+  },
+  {
+   "id": "t_cards",
+   "en": "Your powers are cards, in three decks: sky, earth and spirit. Pick a card, then touch the world where it should happen.",
+   "de": "Deine Kräfte sind Karten in drei Stapeln: Himmel, Erde und Geist. Wähl eine Karte und tipp dann auf die Welt, wo sie wirken soll."
+  },
+  {
+   "id": "t_try",
+   "en": "Try it now. Choose rain, and let it fall on their village.",
+   "de": "Probier es aus. Wähl den Regen und lass ihn über ihrem Dorf fallen."
+  },
+  {
+   "id": "t_tried",
+   "en": "Beautiful. Now watch how they explain what just happened.",
+   "de": "Schön. Jetzt sieh zu, wie sie sich erklären, was gerade passiert ist."
+  },
+  {
+   "id": "t_prayer",
+   "en": "Someone is praying. Answer with the matching card before time runs out, and a myth may be born.",
+   "de": "Jemand betet. Antworte rechtzeitig mit der passenden Karte, dann entsteht vielleicht ein Mythos."
+  },
+  {
+   "id": "t_dream",
+   "en": "In the spirit deck you find the dream. Choose a theme, then a person, and the idea will grow inside them.",
+   "de": "Im Stapel Geist liegt der Traum. Wähl ein Thema, dann einen Menschen, und die Idee wächst in ihm."
+  },
+  {
+   "id": "t_speed",
+   "en": "Time keeps flowing, even when you close the game. Here you can make it run faster.",
+   "de": "Die Zeit läuft weiter, auch wenn du das Spiel schließt. Hier kannst du sie schneller laufen lassen."
+  },
+  {
+   "id": "t_story",
+   "en": "Press H to open your story. Your diary grows with every day of your life.",
+   "de": "Mit H öffnest du deine Geschichte. Dein Tagebuch wächst mit jedem Tag deines Lebens."
+  },
+  {
+   "id": "t_ghost",
+   "en": "Press G to walk the island as a spirit. No one can see you. Only the animals feel you.",
+   "de": "Mit G gehst du als Geist über die Insel. Niemand sieht dich, nur die Tiere spüren dich."
+  },
+  {
+   "id": "t_book",
+   "en": "The Island Book knows every person and every coin. The Chronicle remembers every day.",
+   "de": "Das Inselbuch kennt jeden Menschen und jede Münze. Die Chronik erinnert sich an jeden Tag."
+  },
+  {
+   "id": "t_end",
+   "en": "That's all you need. Everything else, the island will teach you.",
+   "de": "Das ist alles, was du brauchst. Den Rest bringt dir die Insel bei."
+  },
+  {
+   "id": "v_spirit",
+   "en": "That someone is you. But you are not a god. You are the spirit of this world: the wind, the water, the weather. You shape the land, and you can walk into their dreams.",
+   "de": "Dieser Jemand bist du. Aber du bist kein Gott. Du bist der Geist dieser Welt: der Wind, das Wasser, das Wetter. Du formst das Land, und du kannst in ihre Träume gehen."
+  },
+  {
+   "id": "v_cards",
+   "en": "Your powers lie at the bottom of the screen, in three decks: sky, earth and spirit. Pick a card, then touch the world where it should happen.",
+   "de": "Deine Kräfte liegen unten am Bildschirm, in drei Stapeln: Himmel, Erde und Geist. Wähl eine Karte und tipp dann auf die Welt, wo sie wirken soll."
+  },
+  {
+   "id": "v_dream",
+   "en": "At night, slip into their dreams and plant an idea. A sail. A song. A warning. What they make of it is up to them.",
+   "de": "Nachts schlüpfst du in ihre Träume und pflanzt eine Idee. Ein Segel. Ein Lied. Eine Warnung. Was sie daraus machen, liegt bei ihnen."
+  },
+  {
+   "id": "v_seasons",
+   "en": "The year turns. Blossoms in spring, golden fields in summer, storms in autumn, and snow that hushes the villages in winter.",
+   "de": "Das Jahr dreht sich. Blüten im Frühling, goldene Felder im Sommer, Stürme im Herbst, und Schnee, der im Winter die Dörfer verstummen lässt."
+  },
+  {
+   "id": "v_hero",
+   "en": "And one life, you live up close. Choose a castaway, read their diary, and watch their children carry the story on, through love, quarrels and war.",
+   "de": "Und ein Leben erlebst du ganz nah. Wähl einen Gestrandeten, lies sein Tagebuch, und sieh zu, wie seine Kinder die Geschichte weitertragen, durch Liebe, Streit und Krieg."
+  },
+  {
+   "id": "v_ghost",
+   "en": "Press G, and walk among them as a spirit. No one sees you. Only the animals feel that you are there.",
+   "de": "Drück G und geh als Geist zwischen ihnen umher. Niemand sieht dich. Nur die Tiere spüren, dass du da bist."
+  },
+  {
+   "id": "tt_goal",
+   "en": "You are the spirit of this world. Guide these people from their first fire to the stars.",
+   "de": "Du bist der Geist dieser Welt. Begleite diese Menschen von ihrem ersten Feuer bis zu den Sternen."
+  },
+  {
+   "id": "tt_look",
+   "en": "First, look around. Move the view and come closer.",
+   "de": "Sieh dich zuerst um. Bewege den Blick und komm näher."
+  },
+  {
+   "id": "tt_person",
+   "en": "Now touch one of your people. Everyone has a name and a story.",
+   "de": "Tippe jetzt einen deiner Menschen an. Jeder hat einen Namen und eine Geschichte."
+  },
+  {
+   "id": "tt_power",
+   "en": "This ring is your power. It grows when they believe in you.",
+   "de": "Dieser Ring ist deine Kraft. Sie wächst, wenn sie an dich glauben."
+  },
+  {
+   "id": "tt_rain",
+   "en": "Send them rain. Choose the rain card.",
+   "de": "Schick ihnen Regen. Wähle die Karte Regen."
+  },
+  {
+   "id": "tt_sign",
+   "en": "They saw your sign. They will tell stories about it.",
+   "de": "Sie haben dein Zeichen gesehen. Sie werden davon erzählen."
+  },
+  {
+   "id": "tt_prayer",
+   "en": "Someone is praying to you. Answer with the card they ask for.",
+   "de": "Jemand betet zu dir. Antworte mit der Karte, um die gebeten wird."
+  },
+  {
+   "id": "tt_answered",
+   "en": "You answered. Their faith grows, and so does your power.",
+   "de": "Du hast geantwortet. Ihr Glaube wächst und mit ihm deine Kraft."
+  },
+  {
+   "id": "tt_dream",
+   "en": "Open the spirit deck and send someone a dream.",
+   "de": "Öffne den Stapel Geist und schicke jemandem einen Traum."
+  },
+  {
+   "id": "tt_time",
+   "en": "Now let time run faster, and watch their village grow.",
+   "de": "Lass jetzt die Zeit schneller laufen und sieh zu, wie ihr Dorf wächst."
+  },
+  {
+   "id": "tt_book",
+   "en": "Open the island book. Everything about your people is in here.",
+   "de": "Öffne das Inselbuch. Hier steht alles über dein Volk."
+  },
+  {
+   "id": "tt_end",
+   "en": "That's all you need. The rest, the island will teach you.",
+   "de": "Mehr brauchst du nicht. Den Rest bringt dir die Insel bei."
+  },
+  {
+   "id": "tt_ghost",
+   "en": "With the spirit button, you can walk among them, unseen.",
+   "de": "Mit dem Geist-Knopf gehst du unsichtbar unter ihnen."
+  },
+  {
+   "id": "tt_map",
+   "en": "The map shows everything they have discovered so far.",
+   "de": "Die Karte zeigt alles, was sie bisher entdeckt haben."
+  },
+  {
+   "id": "tt_story",
+   "en": "One of them is your own person. Follow that life here.",
+   "de": "Einer von ihnen ist dein eigener Mensch. Hier folgst du diesem Leben."
+  }
+ ]
+}

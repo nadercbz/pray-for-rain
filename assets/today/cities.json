@@ -1,0 +1,81 @@
+{
+ "version": 1,
+ "date": "2026-10-26",
+ "count": 171654,
+ "W": 2048,
+ "H": 1024,
+ "lon0": -169.0,
+ "note": "pop: GeoNames Einwohner (Stand unterschiedlich, als 2020 angenommen) mal Landeswachstum bis 26.10.2026; metro: Natural Earth pop_max mal Stadtwachstum seit 2015, mindestens die UN-Projektion pop2025/2050; flag: 1 Hauptstadt, 2 Provinzhauptstadt (PPLA), 4 Großraum ab 10 Mio., 8 Wahrzeichen; en/de: ein Name je Zeile, de leer, wenn gleich oder unbekannt",
+ "sources": [
+  {
+   "name": "GeoNames cities1000 und countryInfo",
+   "url": "https://download.geonames.org/export/dump/",
+   "license": "CC BY 4.0",
+   "use": "Orte, Hauptstädte, Währung, Sprache"
+  },
+  {
+   "name": "Natural Earth Populated Places 10m",
+   "url": "https://www.naturalearthdata.com/",
+   "license": "public domain",
+   "use": "deutsche Ortsnamen, Großräume (pop_max, UN-Projektion pop2025)"
+  },
+  {
+   "name": "World Bank Open Data API",
+   "url": "https://api.worldbank.org/v2/",
+   "license": "CC BY 4.0",
+   "use": "Bevölkerung, Wachstum, Geburten, Sterbefälle, Lebenserwartung, Stadtanteil, BIP, Fläche, Militärausgaben"
+  }
+ ],
+ "layers": {
+  "lon": [
+   0,
+   628526,
+   "float32"
+  ],
+  "lat": [
+   628526,
+   608215,
+   "float32"
+  ],
+  "pop": [
+   1236741,
+   76215,
+   "uint32"
+  ],
+  "metro": [
+   1312956,
+   28262,
+   "uint32"
+  ],
+  "ctry": [
+   1341218,
+   129600,
+   "uint16"
+  ],
+  "tx": [
+   1470818,
+   256476,
+   "uint16"
+  ],
+  "ty": [
+   1727294,
+   231065,
+   "uint16"
+  ],
+  "flag": [
+   1958359,
+   4390,
+   "uint8"
+  ],
+  "en": [
+   1962749,
+   1022424,
+   "utf8"
+  ],
+  "de": [
+   2985173,
+   12408,
+   "utf8"
+  ]
+ }
+}
